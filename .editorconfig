@@ -1,3 +1,4 @@
+# !对一下后缀是以下的文件生效
 [*.{js,jsx,ts,tsx,vue}]
 indent_style = space
 indent_size = 2
