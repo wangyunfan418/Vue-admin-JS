@@ -171,13 +171,30 @@ export const constantRoutes = [{
 },
 
 {
-  path: 'external-link',
+  path: '/transfer',
   component: Layout,
   children: [{
-    path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
+    path: 'index',
+    name: 'Transfer',
+    component: () => import('@/views/transfer/index'),
     meta: {
-      title: 'External Link',
+      title: 'Transfer',
       icon: 'link'
+    }
+  }]
+},
+
+// !组件的方法传递
+{
+  path: '/means',
+  component: Layout,
+  children: [{
+    path: 'index',
+    name: 'Means',
+    component: () => import('@/views/means'),
+    meta: {
+      title: 'Means',
+      icon: 'form'
     }
   }]
 },
