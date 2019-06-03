@@ -16,7 +16,7 @@
       <Pie />
     </div>
     <div class="item item-monitor">
-      <BrokenLine />
+      <BrokenLineDemo chart-type="line" :chart-data="chartData" :xchart-data="xchartData" />
     </div>
   </div>
 </template>
@@ -30,6 +30,8 @@ import Columnar from '@/components/Charts/Columnar/index'
 import BrokenLine from '@/components/Charts/BrokenLine/index'
 // !饼图 空心
 import Round from '@/components/Charts/Round/index'
+// !折线图封装 demo
+import BrokenLineDemo from '@/components/Charts/BrokenLineDemo/index'
 
 export default {
   name: 'Dashboard',
@@ -37,7 +39,50 @@ export default {
     Pie,
     Columnar,
     BrokenLine,
-    Round
+    Round,
+    BrokenLineDemo
+  },
+  data() {
+    return {
+      xchartData: ['2018-08-01', '2018-08-02', '2018-08-03', '2018-08-04', '2018-08-05'],
+      chartData: [
+        // ['2018-08-01', 120, '产线1故障率'],
+        // ['2018-08-02', 980, '产线2故障率'],
+        // ['2018-08-03', 20, '产线3故障率'],
+        // ['2018-08-04', 89, '产线4故障率'],
+        // ['2018-08-05', 900, '产线5故障率']
+        {
+          name: '产线1故障率',
+          type: 'line',
+          smooth: false,
+          data: [20, 12, 1131, 24, 290, 30, 310]
+        },
+        {
+          name: '产线2故障率',
+          type: 'line',
+          smooth: false,
+          data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+          name: '产线3故障率',
+          type: 'line',
+          smooth: false,
+          data: [150, 232, 201, 154, 190, 330, 410]
+        },
+        {
+          name: '产线4故障率',
+          type: 'line',
+          smooth: false,
+          data: [320, 332, 121, 334, 390, 330, 320]
+        },
+        {
+          name: '产线5故障率',
+          type: 'line',
+          smooth: false,
+          data: [80, 92, 901, 934, 1290, 1330, 1320]
+        }
+      ]
+    }
   },
   computed: {
   },
