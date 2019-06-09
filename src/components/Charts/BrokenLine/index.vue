@@ -15,86 +15,57 @@
 </template>
 <script>
 import echarts from 'echarts'
+import debounce from 'loadsh/debounce'
+import { addListener, removeListener } from 'resize-detector'
 
 export default {
   name: 'BrokenLine',
+  props: {
+    option: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     return {
 
     }
   },
+  watch: {
+    // !监听数据变化,更新视图, 深度监听比较消耗性能
+    // option: {
+    //   handler(value) {
+    //     this.ChartBrokenLine.setOption(value)
+    //   },
+    //   deep: true
+    // }
+    // !普通监听, 父组件手动改变
+    option(value) {
+      this.ChartBrokenLine.setOption(value)
+    }
+  },
+  created() {
+    // !防抖
+    this.resize = debounce(this.resize, 300)
+  },
   mounted() {
-    this.getBrokenLineCharts()
+    this.renderChart()
+    addListener(this.$refs.EchartsBrokenLine, this.resize)
+  },
+  beforeDestroy() {
+    removeListener(this.$refs.ChartBrokenLine, this.resize)
+    this.ChartBrokenLine.dispose()
+    this.ChartBrokenLine = null
   },
   methods: {
-    getBrokenLineCharts() {
+    resize() {
+      console.log('debounce')
+      this.ChartBrokenLine.resize()
+    },
+    renderChart() {
       // !初始化echarts实例, 挂载到实例
-      const ChartBrokenLine = echarts.init(this.$refs.EchartsBrokenLine)
-      // !绘制图表
-      ChartBrokenLine.setOption({
-        // ?颜色值
-        color: ['#3498db', '#74b9ff', '#2ecc71', '#f1c40f', '#e74c3c'],
-        title: {
-          // text: '折线图堆叠'
-        },
-        tooltip: {
-          trigger: 'axis'
-        },
-        legend: {
-          data: ['产线1故障率', '产线2故障率', '产线3故障率', '产线4故障率', '产线5故障率']
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
-        },
-        toolbox: {
-          feature: {
-            saveAsImage: {}
-          }
-        },
-        xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: ['2018-08-01', '2018-08-04', '2018-08-07', '2018-08-10', '2018-08-13', '2018-08-16', '2018-08-19']
-        },
-        yAxis: {
-          type: 'value'
-        },
-        series: [
-          {
-            name: '产线1故障率',
-            type: 'line',
-            smooth: false,
-            data: [120, 132, 301, 134, 90, 230, 210]
-          },
-          {
-            name: '产线2故障率',
-            type: 'line',
-            smooth: false,
-            data: [220, 182, 191, 234, 290, 330, 310]
-          },
-          {
-            name: '产线3故障率',
-            type: 'line',
-            smooth: false,
-            data: [150, 232, 201, 154, 190, 330, 410]
-          },
-          {
-            name: '产线4故障率',
-            type: 'line',
-            smooth: false,
-            data: [320, 332, 121, 334, 390, 330, 320]
-          },
-          {
-            name: '产线5故障率',
-            type: 'line',
-            smooth: false,
-            data: [80, 92, 901, 934, 1290, 1330, 1320]
-          }
-        ]
-      })
+      this.ChartBrokenLine = echarts.init(this.$refs.EchartsBrokenLine)
+      this.ChartBrokenLine.setOption(this.option)
     }
   }
 }

@@ -1,23 +1,13 @@
 <template>
-  <!-- <div class="container-pie"> -->
-  <!-- <div class="status">
-      <span style="font-size: 20px;">故障率分析:</span>
-      <div class="statusBtn">
-        <el-button size="mini">昨日故障率</el-button>
-        <el-button size="mini">7天故障率</el-button>
-        <el-button size="mini">4周故障率</el-button>
-        <el-button size="mini">3个月故障率</el-button>
-      </div>
-    </div> -->
-  <!-- echarts 图表 -->
   <div ref="EchartsBrokenLineDemo" class="container-pie" />
-  <!-- </div> -->
 </template>
 <script>
 import echarts from 'echarts'
+import resize from '../mixins/resize'
 
 export default {
   name: 'BrokenLineDemo',
+  mixins: [resize],
   props: {
     chartType: {
       type: String,
@@ -37,35 +27,12 @@ export default {
       chartDataList: []
     }
   },
-  computed: {
-    // xAxisData() {
-    //   return this.chartData.map(function(item) {
-    //     return item[0]
-    //   })
-    // },
-    // yAxisData() {
-    //   return this.chartData.map(function(item) {
-    //     return item[1]
-    //   });
-    // }
-  },
+  computed: {},
   mounted() {
     this.getBrokenLineCharts()
     console.table(this.xchartData)
   },
   methods: {
-    // chartList() {
-    //   let arrData = this.chartData
-    //   let obj = []
-    //   arrData.map((item) => {
-    //     // console.log(item.data)
-    //     obj.push({
-    //       name: item.name,
-    //       data: item.data
-    //     })
-    //   })
-    //   // return obj
-    // },
     getBrokenLineCharts() {
       // !初始化echarts实例, 挂载到实例
       const ChartBrokenLine = echarts.init(this.$refs.EchartsBrokenLineDemo)
