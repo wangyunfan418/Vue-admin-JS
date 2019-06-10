@@ -6,6 +6,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 import lodash from 'lodash'
+import Drawer from 'ant-design-vue/lib/drawer'
+import 'ant-design-vue/lib/drawer/style/css'
 
 import '@/styles/index.scss' // global css
 // ?引入 echarts
@@ -38,6 +40,8 @@ import {
 if (process.env.NODE_ENV === 'production') {
   mockXHR()
 }
+// ?使用 ant 抽屉组件
+Vue.use(Drawer)
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, {
