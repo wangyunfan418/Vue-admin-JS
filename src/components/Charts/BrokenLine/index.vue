@@ -54,7 +54,7 @@ export default {
     // console.log(this.option)
   },
   beforeDestroy() {
-    removeListener(this.$refs.ChartBrokenLine, this.resize)
+    removeListener(this.$refs.EchartsBrokenLine, this.resize)
     this.ChartBrokenLine.dispose()
     this.ChartBrokenLine = null
   },
