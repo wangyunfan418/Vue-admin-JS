@@ -51,7 +51,6 @@ export default {
   mounted() {
     this.renderChart()
     addListener(this.$refs.EchartsBrokenLine, this.resize)
-    // console.log(this.option)
   },
   beforeDestroy() {
     removeListener(this.$refs.EchartsBrokenLine, this.resize)
