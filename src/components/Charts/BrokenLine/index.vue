@@ -74,7 +74,6 @@ export default {
         })
         return obj
       }
-      console.log(obj)
       chartName(this.option)
       // !初始化echarts实例, 挂载到实例
       this.ChartBrokenLine = echarts.init(this.$refs.EchartsBrokenLine)
