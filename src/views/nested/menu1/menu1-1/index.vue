@@ -102,6 +102,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .form-style {
+  padding: 20px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);

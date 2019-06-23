@@ -41,12 +41,12 @@
         </el-select>
         <el-input
           v-if="item.type === 'textarea'"
-          type="textarea"
           v-model="form[item.key]"
+          type="textarea"
           style="width: 100%;"
           :maxlength="item.maxlength"
           :minlenght="item.minlength"
-        ></el-input>
+        />
       </el-form-item>
       <el-button v-show="formSet.submitShow" type="primary" size="mini" @click="onSubmit">保存</el-button>
       <el-button v-show="formSet.cancelShow" size="mini" @click="onCancel">取消</el-button>
@@ -60,7 +60,7 @@ export default {
   props: {
     span: {
       type: Number,
-      default: ''
+      default: () => ''
     },
     form: {
       type: Object,
