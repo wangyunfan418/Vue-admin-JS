@@ -83,6 +83,15 @@ export const constantRoutes = [{
       title: 'Tree',
       icon: 'tree'
     }
+  },
+  {
+    path: 'lbTable',
+    name: 'lbTable',
+    component: () => import('@/views/lbTable/index'),
+    meta: {
+      title: 'lbTable',
+      icon: 'tree'
+    }
   }
   ]
 },
@@ -195,6 +204,34 @@ export const constantRoutes = [{
     meta: {
       title: 'Means',
       icon: 'form'
+    }
+  }]
+},
+// !VueSlot
+{
+  path: '/VueSlot',
+  component: Layout,
+  children: [{
+    path: 'index',
+    name: 'VueSlot',
+    component: () => import('@/views/VueSlot'),
+    meta: {
+      title: 'VueSlot',
+      icon: 'form'
+    }
+  }]
+},
+// !Gantt
+{
+  path: '/gantt',
+  component: Layout,
+  children: [{
+    path: 'index',
+    name: 'gantt',
+    component: () => import('@/views/gantt'),
+    meta: {
+      title: 'gantt',
+      icon: 'link'
     }
   }]
 },

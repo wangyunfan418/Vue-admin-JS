@@ -8,15 +8,15 @@
         <el-button size="mini">4周故障率</el-button>
         <el-button size="mini">3个月故障率</el-button>
       </div>
-        </div>-->
+    </div>-->
     <!-- echarts 图表 -->
     <div ref="EchartsBrokenLine" class="item-1" />
   </div>
 </template>
 <script>
-import echarts from 'echarts'
-import debounce from 'loadsh/debounce'
-import { addListener, removeListener } from 'resize-detector'
+import echarts from 'echarts';
+import debounce from 'loadsh/debounce';
+import { addListener, removeListener } from 'resize-detector';
 
 export default {
   name: 'BrokenLine',
@@ -27,9 +27,7 @@ export default {
     }
   },
   data() {
-    return {
-
-    }
+    return {};
   },
   watch: {
     // !监听数据变化,更新视图, 深度监听比较消耗性能
@@ -41,42 +39,42 @@ export default {
     // }
     // !普通监听, 父组件手动改变
     option(value) {
-      this.ChartBrokenLine.setOption(value)
+      this.ChartBrokenLine.setOption(value);
     }
   },
   created() {
     // !防抖
-    this.resize = debounce(this.resize, 100)
+    this.resize = debounce(this.resize, 100);
   },
   mounted() {
-    this.renderChart()
-    addListener(this.$refs.EchartsBrokenLine, this.resize)
+    this.renderChart();
+    addListener(this.$refs.EchartsBrokenLine, this.resize);
   },
   beforeDestroy() {
-    removeListener(this.$refs.EchartsBrokenLine, this.resize)
-    this.ChartBrokenLine.dispose()
-    this.ChartBrokenLine = null
+    removeListener(this.$refs.EchartsBrokenLine, this.resize);
+    this.ChartBrokenLine.dispose();
+    this.ChartBrokenLine = null;
   },
   methods: {
     resize() {
-      this.ChartBrokenLine.resize()
+      this.ChartBrokenLine.resize();
     },
     renderChart() {
       // !数据处理
       const obj = {
         x: [],
         y: []
-      }
+      };
       function chartName(data) {
-        data.map((item) => {
-          obj.x.push(item.createTime)
-          obj.y.push(item.utilization)
-        })
-        return obj
+        data.map(item => {
+          obj.x.push(item.createTime);
+          obj.y.push(item.utilization);
+        });
+        return obj;
       }
-      chartName(this.option)
+      chartName(this.option);
       // !初始化echarts实例, 挂载到实例
-      this.ChartBrokenLine = echarts.init(this.$refs.EchartsBrokenLine)
+      this.ChartBrokenLine = echarts.init(this.$refs.EchartsBrokenLine);
       this.ChartBrokenLine.setOption({
         // ?颜色值
         color: ['#3498db', '#74b9ff', '#2ecc71', '#f1c40f', '#e74c3c'],
@@ -87,7 +85,13 @@ export default {
           trigger: 'axis'
         },
         legend: {
-          data: ['产线1故障率', '产线2故障率', '产线3故障率', '产线4故障率', '产线5故障率']
+          data: [
+            '产线1故障率',
+            '产线2故障率',
+            '产线3故障率',
+            '产线4故障率',
+            '产线5故障率'
+          ]
         },
         grid: {
           left: '3%',
@@ -107,7 +111,6 @@ export default {
         xAxis: {
           type: 'category',
           boundaryGap: false,
-          // data: ['2018-08-01', '2018-08-04', '2018-08-07', '2018-08-10', '2018-08-13', '2018-08-16', '2018-08-19']
           data: obj.x
         },
         yAxis: {
@@ -145,11 +148,10 @@ export default {
             data: [80, 92, 901, 934, 1290, 1330, 1320]
           }
         ]
-      }
-      )
+      });
     }
   }
-}
+};
 </script>
 <style lang="scss" scoped>
 .container-pie {
